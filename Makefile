@@ -727,7 +727,11 @@ else
 ifdef CONFIG_PROFILE_ALL_BRANCHES
 KBUILD_CFLAGS	+= -O2 $(call cc-disable-warning,maybe-uninitialized,)
 else
+ifeq ($(cc-name),clang)
+KBUILD_CFLAGS   += -03 $(call cc-option,-mcpu=cortex-a53+crc+crypto,-march=armv8-a+crc+crypto,-mtune=cortex-a53)
+else
 KBUILD_CFLAGS   += -O2
+endif
 endif
 endif
 
