@@ -364,9 +364,11 @@ CHECK		= sparse
 CHECKFLAGS     := -D__linux__ -Dlinux -D__STDC__ -Dunix -D__unix__ \
 		  -Wbitwise -Wno-return-void $(CF)
 NOSTDINC_FLAGS  =
+
+CLANG_OPT_FLAGS	= -funsafe-math-optimizations -funroll-loops -ffast-math -fvectorize -fslp-vectorize -meabi gnu
 CFLAGS_MODULE   =
 AFLAGS_MODULE   =
-LDFLAGS_MODULE  =
+LDFLAGS_MODULE  = --strip-debug
 CFLAGS_KERNEL	=
 AFLAGS_KERNEL	=
 LDFLAGS_vmlinux =
@@ -395,7 +397,7 @@ KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
 		   -fno-strict-aliasing -fno-common -fshort-wchar \
 		   -Werror-implicit-function-declaration \
 		   -Wno-format-security \
-		   -std=gnu89
+		   -std=gnu89 $(CLANG_OPT_FLAGS)
 KBUILD_CPPFLAGS := -D__KERNEL__
 KBUILD_AFLAGS_KERNEL :=
 KBUILD_CFLAGS_KERNEL :=
@@ -725,8 +727,8 @@ else
 ifdef CONFIG_PROFILE_ALL_BRANCHES
 KBUILD_CFLAGS	+= -O2 $(call cc-disable-warning,maybe-uninitialized,)
 else
-ifeq ($(cc-name),clang)
-KBUILD_CFLAGS   += -O3 $(call cc-option,-mcpu=cortex-a53+crc+crypto,-march=armv8-a+crc+crypto,-mtune=cortex-a53)
+ifdef CC_OPTIMIZE_HARDER
+KBUILD_CFLAGS   += -O3 $(call cc-option,-g0,-mcpu=cortex-a53+crc+crypto,-march=armv8-a+crc+crypto,-mtune=cortex-a53)
 else
 KBUILD_CFLAGS   += -O2
 endif
