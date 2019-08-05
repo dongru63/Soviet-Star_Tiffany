@@ -139,10 +139,10 @@
 				39 01 00 00 00 00 02 51 ff
 				39 01 00 00 00 00 02 53 2C
 				39 01 00 00 00 00 02 55 00
-				39 01 00 00 78 00 02 11 00
-				39 01 00 00 14 00 02 29 00];
-		qcom,mdss-dsi-off-command = [39 01 00 00 14 00 02 28 00
-				39 01 00 00 78 00 02 10 00
+				39 01 00 00 10 00 02 11 00
+				39 01 00 00 04 00 02 29 00];
+		qcom,mdss-dsi-off-command = [39 01 00 00 07 00 02 28 00
+				39 01 00 00 39 00 02 10 00
 				39 01 00 00 00 00 02 00 00
 				39 01 00 00 00 00 04 FF 87 16 01
 				39 01 00 00 00 00 02 00 80
@@ -156,7 +156,7 @@
 				23 18 07 08 05 03 04 a0];
 
 		qcom,mdss-dsi-on-command-state = "dsi_lp_mode";
-		qcom,mdss-dsi-off-command-state = "dsi_lp_mode";
+		qcom,mdss-dsi-off-command-state = "dsi_hs_mode";
 		qcom,mdss-dsi-cold_gamma-command-state = "dsi_lp_mode";
 		qcom,mdss-dsi-warm_gamma-command-state = "dsi_lp_mode";
 		qcom,mdss-dsi-default_gamma-command-state = "dsi_lp_mode";
@@ -165,7 +165,7 @@
 		qcom,mdss-dsi-CE_on-command-state = "dsi_hs_mode";
 		qcom,mdss-dsi-CE_off-command-state = "dsi_hs_mode";
 		qcom,mdss-dsi-h-sync-pulse = <1>;
-		qcom,mdss-dsi-traffic-mode = "burst_mode";
+		qcom,mdss-dsi-traffic-mode = "non_burst_sync_pulse";
 		qcom,mdss-dsi-bllp-eof-power-mode;
 		qcom,mdss-dsi-bllp-power-mode;
 		qcom,mdss-dsi-lane-0-state;
